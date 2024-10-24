@@ -6,7 +6,7 @@ import altair as alt
 # Title of the app
 st.title('Navigating the Car Market: Where to Sell Your Vehicle in Saudi Arabia')
 
-st.write('Do you want to sell your old car and buy a new one? Avoid the hassles of selling with the Sayara platform. Sayara saves you time and effort by inspecting and evaluating your car, offering you a competitiveprice—all from the comfort of your home.') 
+st.write('Do you want to sell your old car and buy a new one? Avoid the hassles of selling with the Sayara platform. Sayara saves you time and effort by inspecting and evaluating your car, offering you a competitive price—all from the comfort of your home.') 
 
 # Read the data from CSV files
 df = pd.read_csv('df_non_negotiable.csv')
@@ -20,15 +20,16 @@ region_price_df = df[['Price', 'Region']].head(20)
 st.header('Syarah Sales Spotlight: Which Cities Are Leading the Used Car Market in Saudi Arabia?')
 st.write("Saudi Arabia's used car market has been growing rapidly. If you're planning to sell a car, targeting cities with the highest purchasing power can increase your chances of a quick sale.")
 most_used_car_areas = df['Region'].value_counts().head(10)
-st.write("Most used car buying areas:")
+st.write("Exploring Saudi Demand for Used Car")
 st.bar_chart(most_used_car_areas)
 st.write("Using a sample of over 3,000 sold used cars, the data shows that purchasing power is strongest in the largest cities.")
-
+st.write("that's lead us to a new question: what are the best-selling brands")
 #Q2 Best selling brands by region
 best_selling_brands_by_region = df.groupby('Region')['Make'].value_counts().groupby(level=0).nlargest(1).reset_index(level=0, drop=True).reset_index()
 
 # Display the best-selling brands by region
 st.header("Best selling brands by region:")
+st.write("Lest’s dive deeper into the Saudi market, we need to show the preferred brands")
 
 # Create a horizontal bar chart for regions and their best-selling brands
 chart = alt.Chart(best_selling_brands_by_region).mark_bar().encode(
@@ -37,16 +38,17 @@ chart = alt.Chart(best_selling_brands_by_region).mark_bar().encode(
     color='Make:N',  # Color by brand (Make)
     tooltip=['Region', 'Make']  # Tooltip to display Region and Make
 ).properties(
-    title="Best-Selling Brands by Region",
+    # title="Best-Selling Brands by Region",
 )
 
 # Display the chart
 st.altair_chart(chart)
-
+st.write("This graphic reflects the right brand for each region and it can be noted that Toyota is the most common in most of Saudi regions")
 
 #Q3 Pricing used cars according to the most influential factors
-
 # Create dropdowns for the user to select the make and year of their car
+st.header('Unlock Your Car’s Value: Instant Estimates on Sayara!')
+st.write("Enter your car's information to get an instant price estimate and see where you stand in the market!")
 make_selected = st.selectbox('Select the Make:', df['Make'].unique())
 
 # Filter the DataFrame to get the available years for the selected make
@@ -71,3 +73,5 @@ filtered_df = df[(df['Make'] == make_selected) &
 
 # Show the price range for the selected criteria
 st.write(f"The estimated price is: {filtered_df['Price'].mean()}")
+
+st.header('With Syyarh, selling your car has become more reliable, better and faster.')
