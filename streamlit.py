@@ -46,28 +46,35 @@ st.altair_chart(chart)
 st.write("This graphic reflects the right brand for each region and it can be noted that Toyota is the most common in most of Saudi regions.")
 
 #Q3 Pricing used cars according to the most influential factors
-# Create dropdowns for the user to select the make and year of their car
+# Create dropdowns for the user to select the make, type, and year of their car
 st.header('Unlock Your Car’s Value: Instant Estimates on Sayara!')
 st.write("Enter your car's information to get an instant price estimate and see where you stand in the market!")
 make_selected = st.selectbox('Select the Make:', df['Make'].unique())
 
-# Filter the DataFrame to get the available years for the selected make
-available_years = df[df['Make'] == make_selected]['Year'].unique()
+# Filter the DataFrame to get the available types for the selected make
+available_types = df[df['Make'] == make_selected]['Type'].unique()
+type_selected = st.selectbox('Select the Type:', available_types)
+
+# Filter the DataFrame to get the available years for the selected make and type
+available_years = df[(df['Make'] == make_selected) & 
+                     (df['Type'] == type_selected)]['Year'].unique()
 year_selected = st.selectbox('Select the Year:', available_years)
 
-# Filter the DataFrame based on the selected make and year to get the available mileage options
+# Filter the DataFrame based on the selected make, type, and year to get the available mileage options
 filtered_mileage_df = df[(df['Make'] == make_selected) & 
+                         (df['Type'] == type_selected) & 
                          (df['Year'] == year_selected)]
 
-# Update the mileage slider to show only the available mileage range for the selected make and year
+# Update the mileage slider to show only the available mileage range for the selected make, type, and year
 if not filtered_mileage_df.empty:
     available_mileage = filtered_mileage_df['Mileage'].unique()
     mileage_selected = st.selectbox('Select the Mileage:', available_mileage)
 else:
-    st.write("No data available for the selected Make and Year.")
+    st.write("No data available for the selected Make, Type, and Year.")
 
-# Filter the DataFrame based on the selected make, year, and mileage
+# Filter the DataFrame based on the selected make, type, year, and mileage
 filtered_df = df[(df['Make'] == make_selected) & 
+                 (df['Type'] == type_selected) & 
                  (df['Year'] == year_selected) & 
                  (df['Mileage'] == mileage_selected)]
 
