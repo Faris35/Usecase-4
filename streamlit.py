@@ -23,7 +23,7 @@ most_used_car_areas = df['Region'].value_counts().head(10)
 st.write("Exploring saudi demand for used cars:")
 st.bar_chart(most_used_car_areas)
 st.write("Using a sample of over 3,000 sold used cars, the data shows that purchasing power is strongest in the largest cities.")
-st.write("That's lead us to a new question: what are the best-selling brands.")
+st.write("That leads us to a new question: what are the best-selling brands.")
 #Q2 Best selling brands by region
 best_selling_brands_by_region = df.groupby('Region')['Make'].value_counts().groupby(level=0).nlargest(1).reset_index(level=0, drop=True).reset_index()
 
