@@ -20,16 +20,16 @@ region_price_df = df[['Price', 'Region']].head(20)
 st.header('Syarah Sales Spotlight: Which Cities Are Leading the Used Car Market in Saudi Arabia?')
 st.write("Saudi Arabia's used car market has been growing rapidly. If you're planning to sell a car, targeting cities with the highest purchasing power can increase your chances of a quick sale.")
 most_used_car_areas = df['Region'].value_counts().head(10)
-st.write("Exploring Saudi Demand for Used Car")
+st.write("Exploring saudi demand for used cars")
 st.bar_chart(most_used_car_areas)
 st.write("Using a sample of over 3,000 sold used cars, the data shows that purchasing power is strongest in the largest cities.")
-st.write("that's lead us to a new question: what are the best-selling brands")
+st.write("That's lead us to a new question: what are the best-selling brands.")
 #Q2 Best selling brands by region
 best_selling_brands_by_region = df.groupby('Region')['Make'].value_counts().groupby(level=0).nlargest(1).reset_index(level=0, drop=True).reset_index()
 
 # Display the best-selling brands by region
 st.header("Best selling brands by region:")
-st.write("Lest’s dive deeper into the Saudi market, we need to show the preferred brands")
+st.write("Lest’s dive deeper into the Saudi market, we need to show the preferred brands:")
 
 # Create a horizontal bar chart for regions and their best-selling brands
 chart = alt.Chart(best_selling_brands_by_region).mark_bar().encode(
@@ -43,7 +43,7 @@ chart = alt.Chart(best_selling_brands_by_region).mark_bar().encode(
 
 # Display the chart
 st.altair_chart(chart)
-st.write("This graphic reflects the right brand for each region and it can be noted that Toyota is the most common in most of Saudi regions")
+st.write("This graphic reflects the right brand for each region and it can be noted that Toyota is the most common in most of Saudi regions.")
 
 #Q3 Pricing used cars according to the most influential factors
 # Create dropdowns for the user to select the make and year of their car
