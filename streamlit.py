@@ -9,7 +9,7 @@ st.title('Navigating the Car Market: Where to Sell Your Vehicle in Saudi Arabia'
 st.write('Do you want to sell your old car and buy a new one? Avoid the hassles of selling with the Sayara platform. Sayara saves you time and effort by inspecting and evaluating your car, offering you a competitiveprice—all from the comfort of your home.') 
 
 # Read the data from CSV files
-df = pd.read_excel('df_non_negotiable.xlsx')
+df = pd.read_csv('df_non_negotiable.csv')
 
 # Prepare the data for the chart
 region_price_df = df[['Price', 'Region']].head(20)
