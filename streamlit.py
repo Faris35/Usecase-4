@@ -1,13 +1,6 @@
 # Import all relevant libraries
 import streamlit as st
-import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-import os
-from scipy.stats import zscore
-from ydata_profiling import ProfileReport
-from ipyvizzu import Chart, Data, Config, Style
 import altair as alt
 
 # Title of the app
